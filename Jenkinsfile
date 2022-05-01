@@ -14,15 +14,13 @@ pipeline {
                 echo "Java VERSION"
                 sh 'java -version'
                 echo 'building project...'
-                
-    
 
 
             }
         }
     }
 }
- stage("Git Clone"){
+    stage("Git Clone"){
 
         git credentialsId: 'GIT_HUB_CREDENTIALS', url: 'https://github.com/bujihalil1936/sosyal-medya.git'
     }
