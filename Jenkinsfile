@@ -20,11 +20,12 @@ pipeline {
         }
     }
 }
-   
-    stage("Dockerfile build"){
-        sh 'Dockerfile build -t jhooq-docker-demo .'
-        sh 'docker image list'
-        sh 'docker tag jhooq-docker-demo bujihalil/jhooq-docker-demo:jhooq-docker-demo'
+    stage('Build Docker image') {
+            steps {
+                sh './gradlew docker'
+                sh 'Dockerfile build -t jhooq-docker-demo .'
+                sh 'docker image list'
+                sh 'docker tag jhooq-docker-demo bujihalil/jhooq-docker-demo:jhooq-docker-demo'
     }
 
     withCredentials([string(credentialsId: 'DOCKER_HUB_PASSWORD', variable: 'PASSWORD')]) {
