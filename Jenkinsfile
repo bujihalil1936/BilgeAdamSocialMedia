@@ -3,10 +3,6 @@ pipeline {
     tools {
         jdk 'jdk'
      }
-    stage("Git Clone"){
-
-        git credentialsId: 'GIT_HUB_CREDENTIALS', url: 'https://github.com/bujihalil1936/sosyal-medya.git'
-    }
     stages {
         stage("build project") {
             steps {
@@ -26,7 +22,10 @@ pipeline {
         }
     }
 }
+ stage("Git Clone"){
 
+        git credentialsId: 'GIT_HUB_CREDENTIALS', url: 'https://github.com/bujihalil1936/sosyal-medya.git'
+    }
     stage("Docker build"){
         sh 'docker version'
         sh 'docker build -t jhooq-docker-demo .'
