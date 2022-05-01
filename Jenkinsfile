@@ -40,4 +40,4 @@ pipeline {
         sh 'kubectl apply -f .'
         
     }
-
+ }
