@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools {
         jdk 'jdk'
-       gradle 'gradle'
+       gradle 'Gradle 7.4.2'
        docker 'docker'
      }
     stages {
