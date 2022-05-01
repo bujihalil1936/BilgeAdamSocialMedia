@@ -36,7 +36,8 @@ pipeline {
     }
     
     stage("kubernetes deployment"){
-        sh 'kubectl apply -f .'
+        sh 'cd KubernatesDocuments && kubectl apply -f .'
+        sh ' cd KubernatesDocuments && cd PROJE && kubectl apply -f .'
         
     }
  }
