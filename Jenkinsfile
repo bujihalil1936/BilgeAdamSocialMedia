@@ -23,7 +23,7 @@ pipeline {
     stage('Build Docker image') {
             steps {
                 sh './gradlew docker'
-                sh 'Dockerfile build -t jhooq-docker-demo .'
+                sh 'docker build -t jhooq-docker-demo .'
                 sh 'docker image list'
                 sh 'docker tag jhooq-docker-demo bujihalil/jhooq-docker-demo:jhooq-docker-demo'
     }
