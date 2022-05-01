@@ -3,6 +3,10 @@ pipeline {
     tools {
         jdk 'jdk'
      }
+    stage("Git Clone"){
+
+        git credentialsId: 'GIT_HUB_CREDENTIALS', url: 'https://github.com/bujihalil1936/sosyal-medya.git'
+    }
     stages {
         stage("build project") {
             steps {
@@ -14,9 +18,32 @@ pipeline {
                 echo "Java VERSION"
                 sh 'java -version'
                 echo 'building project...'
+                
+    
 
 
             }
         }
     }
 }
+
+    stage("Docker build"){
+        sh 'docker version'
+        sh 'docker build -t jhooq-docker-demo .'
+        sh 'docker image list'
+        sh 'docker tag jhooq-docker-demo bujihalil/jhooq-docker-demo:jhooq-docker-demo'
+    }
+
+    withCredentials([string(credentialsId: 'DOCKER_HUB_PASSWORD', variable: 'PASSWORD')]) {
+        sh 'docker login -u bujihalil -p $PASSWORD'
+    }
+
+    stage("Push Image to Docker Hub"){
+        sh 'docker push  bujihalil/jhooq-docker-demo:jhooq-docker-demo'
+    }
+    
+    stage("kubernetes deployment"){
+        sh 'kubectl apply -f .'
+        
+    }
+} 
