@@ -27,11 +27,15 @@ pipeline {
             }
         }
         stage("Push Image to Docker Hub"){
-            sh 'docker push  bujihalil/jhooq-docker-demo:jhooq-docker-demo'
+            steps {
+                sh 'docker push  bujihalil/jhooq-docker-demo:jhooq-docker-demo'
+            }
         }
         stage("kubernetes deployment"){
-            sh 'cd KubernatesDocuments && kubectl apply -f .'
-            sh ' cd KubernatesDocuments && cd PROJE && kubectl apply -f .'
+            steps{
+                sh 'cd KubernatesDocuments && kubectl apply -f .'
+                sh 'cd KubernatesDocuments && cd PROJE && kubectl apply -f .'
+            }
         }
     }
 }
