@@ -18,6 +18,8 @@ pipeline {
         }
         stage('Build Docker image') {
             steps {
+                sh 'sudo usermod -a -G docker ec2-user'
+                sh 'newgrp docker'
                 sh 'docker build -t jhooq-docker-demo .'
                 sh 'docker image list'
                 sh 'docker tag jhooq-docker-demo bujihalil/jhooq-docker-demo:jhooq-docker-demo'
