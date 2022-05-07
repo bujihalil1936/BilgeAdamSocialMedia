@@ -20,7 +20,7 @@ pipeline {
         }
     }
 }
-    stage('Build Docker image') {
+        stage('Build Docker image') {
             steps {
                 sh 'docker build -t jhooq-docker-demo .'
                 sh 'docker image list'
